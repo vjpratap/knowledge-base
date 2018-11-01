@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_090542) do
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
-  create_table "questions", force: :cascade do |t|
+  create_table "question", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.integer "upvote"
@@ -34,5 +34,5 @@ ActiveRecord::Schema.define(version: 2018_10_29_090542) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "question"
 end

@@ -1,6 +1,6 @@
 class CreateQuestions < ActiveRecord::Migration[5.2]
   def change
-    create_table :questions do |t|
+    create_table :question do |t|
       t.string :title
       t.text :description
       t.integer :upvote
