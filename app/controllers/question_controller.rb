@@ -27,10 +27,21 @@ class QuestionController < ApplicationController
     end
   end
 
-  # def update
-  #   @question = Question.find(params[:id])
-  #   if
-  # end
+  def update
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      render json: @question, status: :ok
+    else
+      render json: @question.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    render json: @question.errors, status: :unprocessable_entity
+
+  end
 
   private
   def question_params
