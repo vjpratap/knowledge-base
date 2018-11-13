@@ -81,10 +81,12 @@ RSpec.describe QuestionController, type: :request do
   describe "DELETE #destroy" do
     it 'should delete the question' do
       new_question = question
-      get "/question/#{new_question.id}"
-      expect(new_question.title).to eq(JSON.parse(response.body)['title'])
+      get '/question'
+      expect(new_question.title).to eq(JSON.parse(response.body)[0]['title'])
+      expect(JSON.parse(response.body).length).to eq(1)
       delete "/question/#{new_question.id}"
-      expect("this is a question").to eq(JSON.parse(response.body)["title"])
+      get '/question'
+      expect(JSON.parse(response.body).length).to eq(0)
     end
 
   end

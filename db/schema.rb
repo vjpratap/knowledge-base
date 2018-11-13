@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_090542) do
+ActiveRecord::Schema.define(version: 2018_11_13_092227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_090542) do
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
-  create_table "question", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.integer "upvote"
@@ -34,5 +34,13 @@ ActiveRecord::Schema.define(version: 2018_10_29_090542) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "answers", "question"
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "answers", "questions"
 end
