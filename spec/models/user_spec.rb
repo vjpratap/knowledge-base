@@ -13,7 +13,6 @@ RSpec.describe User, type: :model do
   end
 
   it "user is invalid without name" do
-    create(:answer)
     user = User.new(email: "vijay@mail.com", password_digest:"1")
     expect(user).to_not be_valid
   end
