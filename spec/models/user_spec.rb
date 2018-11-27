@@ -13,17 +13,17 @@ RSpec.describe User, type: :model do
   end
 
   it "user is invalid without name" do
-    user = User.new(email: "vijay@mail.com", password_digest:"1")
+    user = build(:user, name: nil)
     expect(user).to_not be_valid
   end
 
   it "user is invalid without email" do
-    user = User.new(name: "Vijay", password_digest:"1")
+    user = build(:user, email: nil )
     expect(user).to_not be_valid
   end
 
   it "user is invalid without password" do
-    user = User.new(name: nil, email: "vijay@mail.com")
+    user = build(:user, password_digest: nil )
     expect(user).to_not be_valid
   end
 end

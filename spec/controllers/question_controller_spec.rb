@@ -44,7 +44,7 @@ RSpec.describe QuestionController, type: :request do
     describe "POST #create" do
       context "with valid attributes" do
         it "saves the new contact in the database" do
-          params = {"question": {"title": "this is a question", "description": "this is description", "upvote": 5, "downvote": 2}}
+          params = {"question": attributes_for(:question)}
           post '/question', params: params
           expect(5).to eq(JSON.parse(response.body)["upvote"])
           expect("this is a question").to eq(JSON.parse(response.body)["title"])
@@ -53,7 +53,7 @@ RSpec.describe QuestionController, type: :request do
       end
       context "with invalid attributes" do
         it "does not save the new contact in the database" do
-          params = {"question": {"title": nil, "description": "this is description", "upvote": nil, "downvote": 2}}
+          params = {"question": attributes_for(:question, title: nil)}
           post '/question', params: params
           expect(422).to eq(response.status)
         end
@@ -64,7 +64,7 @@ RSpec.describe QuestionController, type: :request do
       new_question = question
       get "/question/#{new_question.id}"
       expect(new_question.title).to eq(JSON.parse(response.body)['title'])
-      params = {"question": {"title": "this is updated question", "description": "this is description", "upvote": 5, "downvote": 2}}
+      params = {"question": attributes_for(:question, title: "this is updated question", "description": "this is description")}
       put "/question/#{new_question.id}", params: params
       expect("this is updated question").to eq(JSON.parse(response.body)["title"])
     end
@@ -72,7 +72,7 @@ RSpec.describe QuestionController, type: :request do
       new_question = question
       get "/question/#{new_question.id}"
       expect(new_question.title).to eq(JSON.parse(response.body)['title'])
-      params = {"question": {"title":nil, "description": "this is updated description", "upvote": 5, "downvote": 2}}
+      params = {"question": attributes_for(:question, title: nil , "description": "this is description")}
       put "/question/#{new_question.id}", params: params
       expect(422).to eq(response.status)
     end
